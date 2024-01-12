@@ -16,15 +16,15 @@ function App() {
   const [forecastWeather, setForecastWeather] = useState(null);
 
   const handleSearchChange = (searchData) => {
-    console.log(searchData)
+
     const [lat, lon] = searchData.value.split(' ');
 
     const currentWeatherFetch = fetch(`${WEATHER_API_URL}/weather?lat=${lat}&lon=${lon}&appid=${WEATHER_API_KEY}&units=metric`)
-
     const forecastWeatherFetch = fetch(`${WEATHER_API_URL}/forecast?lat=${lat}&lon=${lon}&appid=${WEATHER_API_KEY}&units=metric`)
 
     Promise.all([currentWeatherFetch, forecastWeatherFetch])
       .then(async (response) => {
+
         const weatherResponse = await response[0].json();
         const forecastResponse = await response[1].json();
 
@@ -47,16 +47,9 @@ function App() {
             return { date, averageTemp }
           })
           forecastResponse.dailyData = dailyData
-
-          console.log('Daily data: ', dailyData)
-
         }
-        console.log(weatherResponse)
-        console.log('Forecast response: ', forecastResponse)
         setCurrentWeather({ city: searchData.label, ...weatherResponse })
         setForecastWeather({ city: searchData.label, ...forecastResponse })
-        console.log(currentWeather)
-        console.log(forecastWeather)
       })
       .catch(err => console.log(err))
   }
@@ -65,7 +58,6 @@ function App() {
   return (
 
     <Container className='mt-3'>
-
       <Row>
         <Col md={8}>
           <Row>
@@ -89,7 +81,6 @@ function App() {
                 </Col>
               </Row>
               <Row>
-
                 <Col md={6}>
                   <WeatherCard data={currentWeather} title='Humidity' unitOfMeasure='%' icon='humidity' value='humidity' />
                 </Col>
@@ -104,7 +95,6 @@ function App() {
           {/* FORECAST GRAPH */}
           {forecastWeather && (
             <ForecastGraph temperatureData={forecastWeather.dailyData} />
-
           )}
         </Col>
         <Col md={4}>
@@ -115,7 +105,6 @@ function App() {
           }
         </Col>
       </Row>
-
     </Container>
   );
 }
