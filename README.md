@@ -8,7 +8,7 @@ L'applicazione è stata costruita con React ed integra l'API GeoDB per la geoloc
 
 Per vedere l'applicazione in azione, visita il seguente link:
 
-[Demo App Previsioni Meteo](DEMO_URL)
+[Demo App Previsioni Meteo](https://react-weather-app-epicode.web.app/)
 
 ## Funzionalità
 
